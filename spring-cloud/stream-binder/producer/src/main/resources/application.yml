@@ -1,0 +1,11 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active: '@spring.profile.activated@'
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: topic

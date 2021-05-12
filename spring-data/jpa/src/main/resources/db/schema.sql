@@ -1,0 +1,5 @@
+CREATE TABLE account(
+    id INTEGER AUTO_INCREMENT,
+    name VARCHAR(255),
+    PRIMARY KEY (id)
+);

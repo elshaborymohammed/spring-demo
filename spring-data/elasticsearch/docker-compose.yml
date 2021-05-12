@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  elastic:
+    image: elasticsearch:7.9.3
+    container_name: elastic
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      cluster.name: docker-cluster
+      discovery.type: single-node
+
+#  kibana:
+#    image: kibana:7.9.3
+#    restart: on-failure
+#    depends_on:
+#      - elastic
+#    container_name: kibana
+#    links:
+#      - elastic:elasticsearch
+#    ports:
+#      - 5601:5601

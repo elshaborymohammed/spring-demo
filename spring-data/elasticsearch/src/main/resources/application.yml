@@ -1,0 +1,11 @@
+spring:
+  data:
+    elasticsearch:
+      rest:
+        uris: http://localhost:9200
+#      cluster-nodes: localhost:9200
+      cluster-name: docker-cluster
+
+logging:
+  level:
+    org.springframework.data.elasticsearch.client.WIRE: trace

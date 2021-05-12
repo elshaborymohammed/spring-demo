@@ -1,0 +1,20 @@
+logging.level.root: debug
+
+spring:
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+        enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    properties.hibernate:
+      format_sql: true
+      ddl-auto: none
+    generate-ddl: true
+  h2:
+    console:
+      enabled: true

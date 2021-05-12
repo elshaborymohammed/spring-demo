@@ -1,0 +1,5 @@
+spring:
+    application:
+        name: consumer-rabbit
+    banner:
+        location: classpath:/banner-rabbit.txt
