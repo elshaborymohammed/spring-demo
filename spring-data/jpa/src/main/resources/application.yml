@@ -3,10 +3,9 @@ logging.level.root: debug
 
 spring:
   data:
-    jpa:
-      repositories:
-        bootstrap-mode: default
-        enabled: true
+    jpa.repositories:
+      bootstrap-mode: default
+      enabled: true
   datasource:
     url: jdbc:h2:mem:testdb
   jpa:
@@ -16,6 +15,5 @@ spring:
     hibernate:
       ddl-auto: create
   h2:
-    console:
-      enabled: true
+    console.enabled: true
 

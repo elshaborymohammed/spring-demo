@@ -4,6 +4,8 @@ INSERT INTO author(id, name) VALUES(1003, 'Uncle BOb');
 
 INSERT INTO publisher(id, name) VALUES(2001, 'Blog');
 INSERT INTO publisher(id, name) VALUES(2002, 'Stackoverflow');
+INSERT INTO publisher(id, name) VALUES(2003, 'Blog Stackoverflow');
+INSERT INTO publisher(id, name) VALUES(2004, 'Blog Quera');
 
 INSERT INTO reference(id, name) VALUES(3001, 'Quera');
 INSERT INTO reference(id, name) VALUES(3002, 'Stackoverflow');
