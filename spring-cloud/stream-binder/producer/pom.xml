@@ -9,8 +9,7 @@
         <artifactId>stream-binder</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <groupId>com.demo.spring.cloud.stream</groupId>
+    
     <artifactId>producer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

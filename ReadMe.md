@@ -49,3 +49,13 @@ https://dzone.com/articles/build-a-secure-app-using-spring-boot-and-websocket
 * [Reflectoring](https://reflectoring.io/spring-boot-hazelcast/)
 * [Introduction to Hazelcast Jet](https://www.baeldung.com/hazelcast-jet)
 * [dzone](https://dzone.com/articles/caching-with-spring-boot-and-hazelcast)
+
+### Spring Security
+* [Toptal](https://www.toptal.com/spring/spring-security-tutorial)
+* [Toptal](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
+* [Baeldung](https://www.baeldung.com/category/spring/spring-security)
+* [Baeldung](https://www.baeldung.com/spring-security-oauth-jwt)
+* [Baeldung](https://www.baeldung.com/category/spring/spring-security/)
+* [FreeCodeCamp](https://www.freecodecamp.org/news/how-to-setup-jwt-authorization-and-authentication-in-spring)
+* [Amigoscode](https://www.youtube.com/watch?v=VVn9OG9nfH0)
+* [Java Brains](https://www.youtube.com/watch?v=X80nJ5T7YpE)

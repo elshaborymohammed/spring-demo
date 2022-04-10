@@ -1,49 +1,45 @@
 package com.demo.spring.web.controller;
 
 import com.demo.spring.web.domain.Post;
-import com.demo.spring.web.repository.PostRepository;
+import com.demo.spring.web.domain.User;
+import com.demo.spring.web.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
-@RequestMapping("/posts")
-public class PostController {
-    private final PostRepository repository;
+@RequestMapping("/users")
+public class UserController {
+    private final UserRepository repository;
 
     @Autowired
-    public PostController(PostRepository repository) {
+    public UserController(UserRepository repository) {
         this.repository = repository;
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    ResponseEntity<?> post(@RequestBody Post post) {
+    ResponseEntity<?> post(@RequestBody User post) {
+        log.info(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(post));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> put(@PathVariable Long id, @RequestBody Post post) {
         throw new IllegalArgumentException("IllegalArgumentException");
 //        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(post));
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_USER')")
     ResponseEntity<?> get() {
-        Iterable<Post> all = repository.findAll();
+        Iterable<User> all = repository.findAll();
         all.forEach(log::info);
         return ResponseEntity.ok(all);
-//        return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_USER')")
     ResponseEntity<?> get(@PathVariable long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.findById(id));
     }

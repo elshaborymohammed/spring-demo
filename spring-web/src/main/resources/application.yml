@@ -1,0 +1,25 @@
+#http://localhost:8080/h2-console
+debug: true
+logging.level.root: debug
+
+spring:
+  data:
+    jpa.repositories:
+      bootstrap-mode: default
+      enabled: true
+    datasource:
+      url: jdbc:h2:mem:testdb
+    jpa:
+      defer-datasource-initialization: true
+      show-sql: true
+      generate-ddl: true
+      hibernate:
+        ddl-auto: none
+    h2:
+      console.enabled: true
+
+#  security:
+#    filter:
+#      order: 10
+#    user:
+#      password: admin

@@ -5,8 +5,8 @@ services:
     image: elasticsearch:7.9.3
     container_name: elastic
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
     environment:
       cluster.name: docker-cluster
       discovery.type: single-node
