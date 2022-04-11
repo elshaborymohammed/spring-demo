@@ -8,8 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@Order (0)
-@Configuration
+//@Order (0)
+//@Configuration
 @Log4j2
 public class StringEncodingFilter implements Filter {
 

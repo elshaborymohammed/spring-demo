@@ -5,3 +5,9 @@ INSERT INTO role (username, role) VALUES('admin', 'USER');
 INSERT INTO role (username, role) VALUES('admin', 'ADMIN');
 INSERT INTO role (username, role) VALUES('user', 'USER');
 
+INSERT INTO post (content, manufacturer) VALUES('content', 'manufacturer');
+INSERT INTO post (content, manufacturer) VALUES('content', 'manufacturer');
+INSERT INTO post (content, manufacturer) VALUES('content', 'manufacturer');
+INSERT INTO post (content, manufacturer) VALUES('content', 'manufacturer');
+INSERT INTO post (content, manufacturer) VALUES('content', 'manufacturer');
+

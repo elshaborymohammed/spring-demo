@@ -30,20 +30,16 @@ public class PostController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> put(@PathVariable Long id, @RequestBody Post post) {
         throw new IllegalArgumentException("IllegalArgumentException");
-//        return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(post));
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     ResponseEntity<?> get() {
-        Iterable<Post> all = repository.findAll();
-        all.forEach(log::info);
-        return ResponseEntity.ok(all);
-//        return ResponseEntity.ok(StreamSupport.stream(repository.findAll().spliterator(),false).collect(Collectors.toList()));
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     ResponseEntity<?> get(@PathVariable long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.findById(id));
     }

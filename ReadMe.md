@@ -51,6 +51,7 @@ https://dzone.com/articles/build-a-secure-app-using-spring-boot-and-websocket
 * [dzone](https://dzone.com/articles/caching-with-spring-boot-and-hazelcast)
 
 ### Spring Security
+* [Spring Doc](https://docs.spring.io/spring-security/site/docs/5.0.0.RELEASE/reference/htmlsingle)
 * [Toptal](https://www.toptal.com/spring/spring-security-tutorial)
 * [Toptal](https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java)
 * [Baeldung](https://www.baeldung.com/category/spring/spring-security)

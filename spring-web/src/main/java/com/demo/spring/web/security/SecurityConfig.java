@@ -17,6 +17,7 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.task.DelegatingSecurityContextAsyncTaskExecutor;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -76,16 +77,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
-                .antMatchers("/h2-console/**", "/users").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 // Our private endpoints
-                .anyRequest().authenticated()
-                .and().httpBasic();
+                .anyRequest().authenticated();
 
         // Add JWT token filter
-//        http.addFilterBefore(
-//                jwtTokenFilter,
-//                UsernamePasswordAuthenticationFilter.class
-//        );
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager());
+        authenticationFilter.setFilterProcessesUrl("/login");
+        http.addFilter(authenticationFilter);
+        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -96,8 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // Used by spring security if CORS is enabled.
     @Bean
     public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
