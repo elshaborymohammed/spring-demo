@@ -25,6 +25,7 @@
         <module>spring-web</module>
         <module>websocket</module>
         <module>hazelcast</module>
+        <module>spring-security</module>
     </modules>
 
     <dependencies>

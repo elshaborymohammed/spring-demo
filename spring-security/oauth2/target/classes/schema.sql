@@ -1,0 +1,21 @@
+CREATE TABLE user(
+    id INTEGER AUTO_INCREMENT,
+    username VARCHAR(255),
+    password VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE role (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(128) NOT NULL,
+  role VARCHAR(128) NOT NULL,
+  CONSTRAINT USER_AUTH_USER_GROUP_FK FOREIGN KEY(username) REFERENCES USER(username),
+  UNIQUE (username, role)
+);
+
+CREATE TABLE post(
+    id INTEGER AUTO_INCREMENT,
+    content VARCHAR(255),
+    manufacturer VARCHAR(255),
+    PRIMARY KEY (id)
+);
