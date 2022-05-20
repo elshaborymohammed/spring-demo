@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -45,18 +46,18 @@ public class JwtUtil {
         }
     }
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(Authentication user) {
         return JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(String.valueOf(user.getPrincipal()))
                 //.withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
                 .sign(algorithm);
     }
 
-    public String generateRefreshToken(User user) {
+    public String generateRefreshToken(Authentication user) {
         return JWT.create()
-                .withSubject(user.getUsername())
+                .withSubject(String.valueOf(user.getPrincipal()))
                 //.withIssuer(request.getRequestURL().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
                 .sign(algorithm);

@@ -1,5 +1,6 @@
-package com.demo.spring.security.security;
+package com.demo.spring.security.security.authentication;
 
+import com.demo.spring.security.security.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -34,19 +34,17 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        User user = (User) authResult.getPrincipal();
-
         JwtUtil jwtUtil = new JwtUtil();
-        String accessToken = jwtUtil.generateAccessToken(user);
-        String refreshToken = jwtUtil.generateRefreshToken(user);
+        String accessToken = jwtUtil.generateAccessToken(authResult);
+        String refreshToken = jwtUtil.generateRefreshToken(authResult);
 
         response.setHeader("access_token", accessToken);
-//        response.setHeader("refresh_token", refreshToken);
+        response.setHeader("refresh_token", refreshToken);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
         Map<String, String> token = Map.of(
-                "access_token", accessToken
-//                "refresh_token", refreshToken
+                "access_token", accessToken,
+                "refresh_token", refreshToken
         );
         new ObjectMapper().writeValue(response.getOutputStream(), token);
         chain.doFilter(request, response);

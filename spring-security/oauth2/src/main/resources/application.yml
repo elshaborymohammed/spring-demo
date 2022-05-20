@@ -1,25 +1,30 @@
-#http://localhost:8080/h2-console
 debug: true
-logging.level.root: debug
 
 spring:
-  data:
-    jpa.repositories:
-      bootstrap-mode: default
-      enabled: true
-    datasource:
-      url: jdbc:h2:mem:testdb
-    jpa:
-      defer-datasource-initialization: true
-      show-sql: true
-      generate-ddl: true
+  application:
+    name: api-gateway-service
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring?useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    properties:
       hibernate:
-        ddl-auto: none
-    h2:
-      console.enabled: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+        hbm2ddl.auto: none
+  mvc:
+    converters:
+      preferred-json-mapper: jackson
 
-#  security:
-#    filter:
-#      order: 10
-#    user:
-#      password: admin
+  security:
+    filter:
+      order: 10
