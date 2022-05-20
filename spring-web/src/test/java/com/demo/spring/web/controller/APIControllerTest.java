@@ -21,27 +21,27 @@ class APIControllerTest {
     void post() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api"))
                 .andDo(print())
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isOk());
     }
 
     @Test
     void put() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.put("/api"))
                 .andDo(print())
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isOk());
     }
 
     @Test
     void patch() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.patch("/api"))
                 .andDo(print())
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isOk());
     }
 
     @Test
     void get() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/api"))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
     }
 }
