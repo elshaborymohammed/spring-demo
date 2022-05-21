@@ -69,24 +69,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Set unauthorized requests exception handler
         http = http
                 .exceptionHandling()
-                .authenticationEntryPoint((request, response, ex) ->
-                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage())
-                )
-                .and();
+                .authenticationEntryPoint((request, response, ex) -> {
+                    ex.printStackTrace();
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+                }).and();
 
         // Set permissions on endpoints
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/posts/**", "/api/**", "/users/**").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
 
         // Add JWT token filter
-        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager());
-        authenticationFilter.setFilterProcessesUrl("/login");
-        http.addFilter(authenticationFilter);
-        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager());
+//        authenticationFilter.setFilterProcessesUrl("/login");
+//        http.addFilter(authenticationFilter);
+//        http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

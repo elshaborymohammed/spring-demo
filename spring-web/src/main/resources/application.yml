@@ -3,6 +3,8 @@ debug: true
 logging.level.root: debug
 
 spring:
+  application:
+    name: web-service
   data:
     jpa.repositories:
       bootstrap-mode: default
@@ -22,4 +24,6 @@ spring:
 #    filter:
 #      order: 10
 #    user:
+server:
+  port: 8081
 #      password: admin

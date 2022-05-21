@@ -1,0 +1,28 @@
+debug: true
+logging.level.root: debug
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: posts
+          uri: ${POST-SERVICE:http://localhost:8081}
+          predicates:
+            - Path=/posts/**
+          filters:
+            - AddRequestHeader=X-REQUEST,value
+            - AddResponseHeader=X-RESPONSE,value
+            - name: Retry
+              args:
+                retries: 3
+                methods: GET
+                backoff:
+                  firstBackoff: 50ms
+                  maxBackoff: 500ms
+
+#            - name: CircuitBreaker
+#              args:
+#                name: web-service
+#                fallbackUri: forward:/fallback
