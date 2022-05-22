@@ -27,12 +27,14 @@ public class AuthenticationProviderService implements AuthenticationProvider {
         UserDetails u = userDetailsService.loadUserByUsername(username);
 
         if (passwordEncoder.matches(password, u.getPassword())) {
+            log.info("Login Successfully!");
             return new UsernamePasswordAuthenticationToken(
                     username,
                     password,
                     u.getAuthorities()
             );
         } else {
+            log.error("Bad credentials!");
             throw new BadCredentialsException("Bad credentials!");
         }
     }

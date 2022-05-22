@@ -54,7 +54,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        log.debug("unsuccessfulAuthentication - username: {}, password: {}", username, password);
+        log.error("unsuccessfulAuthentication - username: {}, password: {}", username, password, failed);
         super.unsuccessfulAuthentication(request, response, failed);
     }
 }

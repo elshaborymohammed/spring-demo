@@ -1,5 +1,6 @@
-package com.demo.spring.security.security;
+package com.demo.spring.security.security.authorization;
 
+import com.demo.spring.security.security.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

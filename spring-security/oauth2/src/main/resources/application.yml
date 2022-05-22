@@ -25,6 +25,6 @@ spring:
     converters:
       preferred-json-mapper: jackson
 
-  security:
-    filter:
-      order: 10
+#  security:
+#    filter:
+#      order: 10
