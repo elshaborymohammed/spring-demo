@@ -3,20 +3,22 @@ package com.demo.spring.security.security.authorization.server;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
-//curl -v -XPOST -u client:secret http://localhost:8080/oauth/token?grant_type=password&username=john&password=12345&scope=read
+//curl -v -XPOST -u client:secret http://localhost:8080/oauth/token?grant_type=password&username=admin&password=12345678&scope=read
 //http  -a client:secret --form POST :8080/oauth/token?grant_type=password&username=john&password=12345&scope=read
-//http  -a client:secret --form POST :8080/oauth/token?grant_type=password&username=admin&password=12345678&scope=read
+//http  -a client:secret --form POST http://localhost:8080/oauth/token?grant_type=password&username=admin&password=12345678&scope=read
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
 public class AuthorizationServerConfigurer extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -45,6 +47,6 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
-        security.checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()").passwordEncoder(passwordEncoder).checkTokenAccess("isAuthenticated()");
     }
 }

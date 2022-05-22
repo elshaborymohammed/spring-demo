@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider);
-        super.configure(auth);
+        //super.configure(auth);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, ex) -> {
                             ex.printStackTrace();
-                            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Error");
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error");
                         }
                 )
                 .and();
@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/h2-console/**", "/oauth/**").permitAll()
+                .antMatchers("/h2-console/**", "/oauth/**", "/oauth/token/**").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated().and();
 
