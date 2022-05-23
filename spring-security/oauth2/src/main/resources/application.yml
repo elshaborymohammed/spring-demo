@@ -2,7 +2,7 @@ debug: true
 
 spring:
   application:
-    name: api-gateway-service
+    name: oauth2-service
   jackson:
     property-naming-strategy: SNAKE_CASE
     serialization:
