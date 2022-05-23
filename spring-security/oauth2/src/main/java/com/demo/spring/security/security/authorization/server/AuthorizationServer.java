@@ -10,13 +10,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
-//curl -v -XPOST -u client:secret http://localhost:8080/oauth/token?grant_type=password&username=admin&password=12345678&scope=read
-//http  -a client:secret --form POST :8080/oauth/token?grant_type=password&username=john&password=12345&scope=read
-//http  -a client:secret --form POST http://localhost:8080/oauth/token?grant_type=password&username=admin&password=12345678&scope=read
+//http -a client:secret --form POST :8080/oauth/token grant_type=password username=admin password=12345678 scope=read
+//http -a resourceserver:resourceserversecret --form POST :8080/oauth/check_token token=
+//http :9090/hello Authorization:'bearer '
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
-public class AuthorizationServerConfigurer extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
@@ -31,13 +31,15 @@ public class AuthorizationServerConfigurer extends AuthorizationServerConfigurer
 //        clientDetails.setAuthorizedGrantTypes(List.of("password"));
 //
 //        clientDetailsService.setClientDetailsStore(Map.of("client", clientDetails));
-//        clients.withClientDetails(clientDetailsService);
 
         clients.inMemory()
                 .withClient("client")
                 .secret("secret")
                 .authorizedGrantTypes("password", "refresh_token")
-                .scopes("read");
+                .scopes("read", "write")
+                .and()
+                .withClient("resourceserver")
+                .secret("resourceserversecret");
     }
 
     @Override

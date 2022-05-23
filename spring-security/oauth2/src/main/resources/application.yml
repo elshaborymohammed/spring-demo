@@ -1,4 +1,12 @@
 debug: true
+logging:
+  level:
+    com:
+      demo: TRACE
+    org:
+      springframework: TRACE
+      springframework.security: DEBUG
+    root: WARN
 
 spring:
   application:
@@ -28,3 +36,11 @@ spring:
 #  security:
 #    filter:
 #      order: 10
+
+security:
+  oauth2:
+    client:
+      client-id: resourceserver
+      client-secret: resourceserversecret
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
